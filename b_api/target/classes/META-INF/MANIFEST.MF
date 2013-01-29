@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Export-Package: org.glassfish.provisioning.sample.b.api;version="1.0.0
+ .SNAPSHOT"
+Bundle-Version: 1.0.0.SNAPSHOT
+Tool: Bnd-0.0.357
+Bundle-Name: b api bundle
+Bnd-LastModified: 1359462207750
+Created-By: 1.7.0_09 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: sample.glassfish.provisioning.b_api
+Import-Package: org.glassfish.provisioning.sample.b.api;version="1.0"
+
