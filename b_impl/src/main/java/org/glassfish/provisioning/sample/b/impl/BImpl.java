@@ -18,6 +18,6 @@ public class BImpl implements BIntf{
 		ServiceReference serviceReference = this.bctx.getServiceReference(AIntf.class.getName());
 	    AIntf a = (AIntf) this.bctx.getService(serviceReference);
 	    
-		return a.sayA() + "And" + "Hello B!";
+		return a.sayA() + " And " + "Hello B";
 	}
 }

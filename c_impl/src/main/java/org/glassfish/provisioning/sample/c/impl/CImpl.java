@@ -6,8 +6,6 @@ public class CImpl implements CIntf{
 
 	@Override
 	public String sayC() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Hello C!";
 	}
-
 }

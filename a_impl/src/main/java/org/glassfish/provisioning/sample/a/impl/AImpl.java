@@ -6,7 +6,6 @@ public class AImpl implements AIntf{
 
 	@Override
 	public String sayA() {
-		return "Hello A!";
+		return "Hello A";
 	}
-
 }

@@ -21,5 +21,4 @@ public class BActivator implements BundleActivator {
 			srg.unregister();
 		}
 	}
-
 }
