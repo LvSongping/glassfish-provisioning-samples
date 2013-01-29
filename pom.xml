@@ -204,6 +204,7 @@
         <module>b_api</module>     
         <module>b_impl</module>  
         <module>c_api</module>     
-        <module>c_impl</module>      
+        <module>c_impl</module>
+        <module>provisioning_client</module>      
     </modules>
 </project>
