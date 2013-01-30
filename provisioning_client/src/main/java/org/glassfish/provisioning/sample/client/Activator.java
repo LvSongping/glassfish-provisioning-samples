@@ -11,6 +11,11 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		ServiceReference serviceReference = context.getServiceReference(ObrHandlerService.class.getName());
 		ObrHandlerService b = (ObrHandlerService) context.getService(serviceReference);
+		
+		//Temp Testing
+		String subSystemPath = "d:/provisioning-sample/subsystems.xml";
+
+		b.deploySubsystems(subSystemPath);
 	}
 
 	@Override
