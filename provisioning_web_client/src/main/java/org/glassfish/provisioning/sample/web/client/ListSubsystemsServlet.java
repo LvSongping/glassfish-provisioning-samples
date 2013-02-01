@@ -21,7 +21,7 @@ import org.osgi.util.tracker.ServiceTracker;
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
-@WebServlet(urlPatterns = "/list")
+@WebServlet(urlPatterns = "/ListSubsystemsServlet")
 public class ListSubsystemsServlet extends HttpServlet {
     
     public void service(HttpServletRequest req, HttpServletResponse resp)
@@ -48,11 +48,11 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    		
 	    		 resp.setContentType("text/html");
 	    	        PrintWriter out = resp.getWriter();
-	    	        out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystem Administration </TITLE> </HEAD> ");
+	    	        out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
 	    	        out.println("<BODY BGCOLOR=#FDF5E6>");
-	    	        out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystem Display Page</H2>");
+	    	        out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Display Page</H2>");
 	    	        out.println("<div align=\"center\">");
-	    	        out.println("<a href=\"index.html\">Backing to Subsystem Administration Page</a>");
+	    	        out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
 	    	        out.println("</div>");
 	    	        try {
 	    	            if (subsystems != null) {
@@ -130,6 +130,19 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    	            e.printStackTrace(out);
 	    	        }
 	    	        out.println("</BODY> </HTML> ");
+	    	}else{
+	    		resp.setContentType("text/html");
+    	        PrintWriter out = resp.getWriter();
+    	        out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
+    	        out.println("<BODY BGCOLOR=#FDF5E6>");
+    	        out.println("<H2 ALIGN=\"CENTER\">Glassfish ALL Subsystems Display Page</H2>");
+    	        out.println("<div align=\"center\">");
+    	        out.println("<H4 ALIGN=\"CENTER\">Doing...</H4>");
+    	        out.println("</div>");
+    	        out.println("<div align=\"center\">");
+    	        out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
+    	        out.println("</div>");
+    	        out.println("</BODY> </HTML> ");
 	    	}
 	    	
     	}catch(Exception e){

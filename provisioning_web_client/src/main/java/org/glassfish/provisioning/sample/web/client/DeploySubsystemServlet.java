@@ -16,8 +16,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.glassfish.obrbuilder.ObrHandlerService;
-import org.glassfish.obrbuilder.subsystem.Module;
-import org.glassfish.obrbuilder.subsystem.Subsystem;
 import org.glassfish.obrbuilder.subsystem.Subsystems;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -91,7 +89,7 @@ public class DeploySubsystemServlet extends HttpServlet {
 			
 			Subsystems subsystems = service.getCurrentSubsystems();
 			
-			getServletContext().getRequestDispatcher("/list?subsystemsName=" + subsystems.getName()).forward(req, resp);
+			getServletContext().getRequestDispatcher("/ListSubsystemsServlet?subsystemsName=" + subsystems.getName()).forward(req, resp);
 
 		} catch (Exception ex) {
 			// ignore
