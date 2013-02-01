@@ -124,7 +124,9 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    	                    e.printStackTrace();
 	    	                }
 	    	            } else {
-	    	                out.println("Subsystem:: " + subsystemsName + " is not yet deployed");
+	    	            	out.println("<div align=\"center\">");
+	    	            	out.println("Subsystem:: " + subsystemsName + " is not yet deployed");
+	    	     	        out.println("</div>");         
 	    	            }
 	    	        } catch (Exception e) {
 	    	            e.printStackTrace(out);
@@ -137,11 +139,36 @@ public class ListSubsystemsServlet extends HttpServlet {
     	        out.println("<BODY BGCOLOR=#FDF5E6>");
     	        out.println("<H2 ALIGN=\"CENTER\">Glassfish ALL Subsystems Display Page</H2>");
     	        out.println("<div align=\"center\">");
-    	        out.println("<H4 ALIGN=\"CENTER\">Doing...</H4>");
-    	        out.println("</div>");
-    	        out.println("<div align=\"center\">");
     	        out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
     	        out.println("</div>");
+    	        out.println("<br>");
+    	        
+    	        //List current subsystems based on subsystemsName parameter
+	    		List<Subsystems> list = service.listSubsystems();
+	    		
+	    		if (list.size() != 0 ){
+	    			out.println("<form method=\"post\" action=\"ListSubsystemsServlet\">");
+	    			out.println("<div align=\"center\">");
+	    			out.println("Please Select a subsystems from the following list to see detailed info:");
+	    			out.println("<br>");
+	    	        out.println("<select size=\"1\" name=\"subsystemsName\">");
+	    	        for(Subsystems subsystems : list){
+	    	        	out.println("<option value =\"" + subsystems.getName() + "\">" + subsystems.getName() + "</option>");
+	    	        }
+	    	        out.println("</select>");
+	    	        out.println("</div>");
+	    	        out.println("<br>");
+	    	        out.println("<div align=\"center\">");
+	    	        out.println("<input type=\"submit\" value=\"display detailed info\" />");
+	    	        out.println("</div>");
+	    	        
+	    	        out.println("</form>");
+	    		}else{
+	    			out.println("<div align=\"center\">");
+	     	        out.println("Currently, glassfish has not deployed any subsystems. ");
+	     	        out.println("</div>");
+	    		}
+    	        
     	        out.println("</BODY> </HTML> ");
 	    	}
 	    	
