@@ -81,24 +81,17 @@ public class DeploySubsystemServlet extends HttpServlet {
 				FileItem item = (FileItem) iter.next();
 				// processes only fields that are not form fields
 				if (!item.isFormField()) {
-					out.println("item.getName(): " + item.getName());
-					out.println("<br>");
-					out.println("item.getString(): " + item.getString());
-					out.println("<br>");
-					out.println("item.getContentType(): "
-							+ item.getContentType());
-					out.println("<br>");
-					out.println("item.getFieldName(): " + item.getFieldName());
-					out.println("<br>");
-					
 					InputStream is = item.getInputStream();
-					
 					//Deploying Subsystem
 					service.deploySubsystems(is);
 					
 					is.close();
 				}
 			}
+			
+			Subsystems subsystems = service.getCurrentSubsystems();
+			
+			getServletContext().getRequestDispatcher("/list?subsystemsName=" + subsystems.getName()).forward(req, resp);
 
 		} catch (Exception ex) {
 			// ignore
