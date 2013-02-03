@@ -29,19 +29,14 @@ public class ListSubsystemsServlet extends HttpServlet {
     		ObrHandlerService service = Util.getObrHandlerService();
 			
 			String subsystemsName = req.getParameter("subsystemsName");
+			
+			PrintWriter out = resp.getWriter();
+			resp.setContentType("text/html");
 	    	
 	    	if (subsystemsName != null){
 	    		//List current subsystems based on subsystemsName parameter
 	    		Subsystems subsystems = service.listSubsystems(subsystemsName);
-	    		
-	    		 resp.setContentType("text/html");
-	    	        PrintWriter out = resp.getWriter();
-	    	        out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
-	    	        out.println("<BODY BGCOLOR=#FDF5E6>");
-	    	        out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Display Page</H2>");
-	    	        out.println("<div align=\"center\">");
-	    	        out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
-	    	        out.println("</div>");
+	    	    outputHeadInfo(out);
 	    	        try {
 	    	            if (subsystems != null) {
 	    	                try {
@@ -66,7 +61,7 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    	                    for(Subsystem subsystem : list){
 	    	                    	out.println("<table border=\"1\" align=\"center\">");
 		    	                    out.println("<tr>");
-	    	                        out.println("<td colspan=\"3\">Subsystems" + count + "</td>");
+	    	                        out.println("<td colspan=\"3\">Subsystem" + count + "</td>");
 	    	                        out.println("</tr>");
 	    	                        out.println("<tr>");
 	    	                        out.println("<td>name</td>");
@@ -121,15 +116,7 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    	        }
 	    	        out.println("</BODY> </HTML> ");
 	    	}else{
-	    		resp.setContentType("text/html");
-    	        PrintWriter out = resp.getWriter();
-    	        out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
-    	        out.println("<BODY BGCOLOR=#FDF5E6>");
-    	        out.println("<H2 ALIGN=\"CENTER\">Glassfish ALL Subsystems Display Page</H2>");
-    	        out.println("<div align=\"center\">");
-    	        out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
-    	        out.println("</div>");
-    	        out.println("<br>");
+	    		outputHeadInfo(out);
     	        
     	        //List current subsystems based on subsystemsName parameter
 	    		List<Subsystems> list = service.listSubsystems();
@@ -165,4 +152,14 @@ public class ListSubsystemsServlet extends HttpServlet {
     		
     	}   	
     }
+
+	private void outputHeadInfo(PrintWriter out) {
+		out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
+		out.println("<BODY BGCOLOR=#FDF5E6>");
+		out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Display Page</H2>");
+		out.println("<div align=\"center\">");
+		out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
+		out.println("</div>");
+		out.println("<br>");
+	}
 }

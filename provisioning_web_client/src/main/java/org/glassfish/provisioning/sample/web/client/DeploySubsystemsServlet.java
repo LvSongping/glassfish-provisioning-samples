@@ -1,6 +1,7 @@
 package org.glassfish.provisioning.sample.web.client;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -73,27 +74,28 @@ public class DeploySubsystemsServlet extends HttpServlet {
 				}
 			}
 			
-			if (subsystems == null){
-				 out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
-	    	     out.println("<BODY BGCOLOR=#FDF5E6>");
-	    	     out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Deployment Page</H2>");
-	    	     out.println("<div align=\"center\">");
-	    	     out.println("Subsystems Deployment failed!");
-	    	     out.println("</div>");
-	    	     out.println("<div align=\"center\">");
-	    	     out.println("<a href=\"deploy.jsp\">Backing to Subsystems Deployment Page</a>");
-	    	     out.println("</div>");
-	    	     out.println("<div align=\"center\">");
-	    	     out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
-	    	     out.println("</div>");
-	    	     out.println("<br>");
-			}else{
-				getServletContext().getRequestDispatcher("/ListSubsystemsServlet?subsystemsName=" + subsystems.getName()).forward(req, resp);
-			}
+			getServletContext().getRequestDispatcher("/ListSubsystemsServlet?subsystemsName=" + subsystems.getName()).forward(req, resp);
+			
 		} catch (Exception ex) {
-			// ignore
+			outputDeployfailedInfo(out);
 		} finally {
 			out.close();
 		}
+	}
+
+	private void outputDeployfailedInfo(PrintWriter out) {
+		out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
+		 out.println("<BODY BGCOLOR=#FDF5E6>");
+		 out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Deployment Page</H2>");
+		 out.println("<div align=\"center\">");
+		 out.println("Subsystems Deployment failed!");
+		 out.println("</div>");
+		 out.println("<div align=\"center\">");
+		 out.println("<a href=\"deploy.jsp\">Backing to Subsystems Deployment Page</a>");
+		 out.println("</div>");
+		 out.println("<div align=\"center\">");
+		 out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
+		 out.println("</div>");
+		 out.println("<br>");
 	}
 }
