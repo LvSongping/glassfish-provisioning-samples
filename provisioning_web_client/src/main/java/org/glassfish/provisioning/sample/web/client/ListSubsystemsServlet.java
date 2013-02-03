@@ -17,7 +17,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * DeploySubsystemServlet for deploying subsystem into glassfish
+ * ListSubsystemServlet for List subsystems deployed in glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */

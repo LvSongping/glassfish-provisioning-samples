@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * DeploySubsystemServlet for deploying subsystem into glassfish
+ * UpdateSubsystemServlet for updating subsystems in glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */

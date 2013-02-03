@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Glassfish Subsystem Administration</title>
+<title>Glassfish Subsystems Administration</title>
 </head>
 <body BGCOLOR="#FDF5E6">
-    <H2 ALIGN="CENTER">Glassfish Subsystem Administration</H2>
+    <H2 ALIGN="CENTER">Glassfish Subsystems Deployment Page</H2>
     <br>
     <form method="post" action="DeploySubsystemServlet" enctype="multipart/form-data">
     <div align="center">
-       Please Select a subsystem definition file to deploy: <br>
+       Please Select a subsystems definition file to deploy: <br>
        <input type="file" name="subsystemFile" />
     </div> 
     <div align="center">
@@ -19,7 +19,7 @@
     </form>
     <br>
     <div align="center">
-       <a href="index.html" >Backing to Subsystem Administration Page</a>
+       <a href="index.html" >Backing to Subsystems Administration Page</a>
     </div> 
 </body>
 </html>

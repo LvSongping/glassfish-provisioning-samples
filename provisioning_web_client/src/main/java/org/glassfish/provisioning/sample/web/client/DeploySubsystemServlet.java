@@ -21,16 +21,12 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * DeploySubsystemServlet for deploying subsystem into glassfish
+ * DeploySubsystemServlet for deploying subsystems into glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
 @WebServlet(urlPatterns = "/DeploySubsystemServlet")
 public class DeploySubsystemServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
@@ -74,6 +70,8 @@ public class DeploySubsystemServlet extends HttpServlet {
 			List<?> formItems = upload.parseRequest(req);
 			Iterator<?> iter = formItems.iterator();
 
+			Subsystems subsystems = null;
+			
 			// iterates over form's fields
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
@@ -81,16 +79,29 @@ public class DeploySubsystemServlet extends HttpServlet {
 				if (!item.isFormField()) {
 					InputStream is = item.getInputStream();
 					//Deploying Subsystem
-					service.deploySubsystems(is);
+					subsystems = service.deploySubsystems(is);
 					
 					is.close();
 				}
 			}
 			
-			Subsystems subsystems = service.getCurrentSubsystems();
-			
-			getServletContext().getRequestDispatcher("/ListSubsystemsServlet?subsystemsName=" + subsystems.getName()).forward(req, resp);
-
+			if (subsystems == null){
+				 out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
+	    	     out.println("<BODY BGCOLOR=#FDF5E6>");
+	    	     out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Deployment Page</H2>");
+	    	     out.println("<div align=\"center\">");
+	    	     out.println("Subsystems Deployment failed!");
+	    	     out.println("</div>");
+	    	     out.println("<div align=\"center\">");
+	    	     out.println("<a href=\"deploy.jsp\">Backing to Subsystems Deployment Page</a>");
+	    	     out.println("</div>");
+	    	     out.println("<div align=\"center\">");
+	    	     out.println("<a href=\"index.html\">Backing to Subsystems Administration Page</a>");
+	    	     out.println("</div>");
+	    	     out.println("<br>");
+			}else{
+				getServletContext().getRequestDispatcher("/ListSubsystemsServlet?subsystemsName=" + subsystems.getName()).forward(req, resp);
+			}
 		} catch (Exception ex) {
 			// ignore
 		} finally {
