@@ -17,16 +17,14 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.glassfish.obrbuilder.ObrHandlerService;
 import org.glassfish.obrbuilder.subsystem.Subsystems;
-import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * DeploySubsystemServlet for deploying subsystems into glassfish
+ * DeploySubsystemsServlet for deploying subsystems into glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
-@WebServlet(urlPatterns = "/DeploySubsystemServlet")
-public class DeploySubsystemServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/DeploySubsystemsServlet")
+public class DeploySubsystemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
@@ -54,17 +52,7 @@ public class DeploySubsystemServlet extends HttpServlet {
 		upload.setSizeMax(REQUEST_SIZE);
 
 		try {
-			BundleContext bc = Util.getBundleContext(this.getClass());
-
-			ServiceTracker st = null;
-
-			st = new ServiceTracker(bc, bc.createFilter("(objectClass="
-					+ ObrHandlerService.class.getName() + ")"), null);
-
-			st.open();
-
-			ObrHandlerService service = (ObrHandlerService) st
-					.waitForService(Util.OBRHADNDLESERVICE_TIMEOUT);
+			ObrHandlerService service = Util.getObrHandlerService();
 
 			// parses the request's content to extract file data
 			List<?> formItems = upload.parseRequest(req);

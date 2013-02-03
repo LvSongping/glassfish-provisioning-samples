@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * UndeploySubsystemServlet for undeploying subsystems in glassfish
+ * UpdateSubsystemsServlet for updating subsystems in glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
-@WebServlet(urlPatterns = "/UndeploySubsystemServlet")
-public class UndeploySubsystemServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/UpdateSubsystemsServlet")
+public class UpdateSubsystemsServlet extends HttpServlet {
     
     public void service(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, java.io.IOException {
-    	PrintWriter out = resp.getWriter();
+        PrintWriter out = resp.getWriter();
     	
     	resp.setContentType("text/html");
         out.println("<HTML> <HEAD> <TITLE> Glassfish Subsystems Administration </TITLE> </HEAD> ");
         out.println("<BODY BGCOLOR=#FDF5E6>");
-        out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Undeployment Page</H2>");
+        out.println("<H2 ALIGN=\"CENTER\">Glassfish Subsystems Update Page</H2>");
         out.println("<div align=\"center\">");
         out.println("<H4 ALIGN=\"CENTER\">Doing...</H4>");
         out.println("</div>");

@@ -7,10 +7,11 @@
 </head>
 <body BGCOLOR="#FDF5E6">
     <H2 ALIGN="CENTER">Glassfish Subsystems Deployment Page</H2>
-    <br>
-    <form method="post" action="DeploySubsystemServlet" enctype="multipart/form-data">
+    <form method="post" action="DeploySubsystemsServlet" enctype="multipart/form-data">
     <div align="center">
-       Please Select a subsystems definition file to deploy: <br>
+       Please Select a subsystems definition file to deploy: 
+       <br>
+       <br>
        <input type="file" name="subsystemFile" />
     </div> 
     <div align="center">

@@ -13,11 +13,9 @@ import org.glassfish.obrbuilder.ObrHandlerService;
 import org.glassfish.obrbuilder.subsystem.Module;
 import org.glassfish.obrbuilder.subsystem.Subsystem;
 import org.glassfish.obrbuilder.subsystem.Subsystems;
-import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * ListSubsystemServlet for List subsystems deployed in glassfish
+ * ListSubsystemsServlet for List subsystems deployed in glassfish
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
@@ -28,17 +26,7 @@ public class ListSubsystemsServlet extends HttpServlet {
             throws ServletException, java.io.IOException {
     	
     	try {
-			BundleContext bc = Util.getBundleContext(this.getClass());
-
-			ServiceTracker st = null;
-
-			st = new ServiceTracker(bc, bc.createFilter("(objectClass="
-					+ ObrHandlerService.class.getName() + ")"), null);
-
-			st.open();
-
-			ObrHandlerService service = (ObrHandlerService) st
-					.waitForService(Util.OBRHADNDLESERVICE_TIMEOUT);
+    		ObrHandlerService service = Util.getObrHandlerService();
 			
 			String subsystemsName = req.getParameter("subsystemsName");
 	    	
@@ -150,6 +138,7 @@ public class ListSubsystemsServlet extends HttpServlet {
 	    			out.println("<form method=\"post\" action=\"ListSubsystemsServlet\">");
 	    			out.println("<div align=\"center\">");
 	    			out.println("Please Select a subsystems from the following list to see detailed info:");
+	    			out.println("<br>");
 	    			out.println("<br>");
 	    	        out.println("<select size=\"1\" name=\"subsystemsName\">");
 	    	        for(Subsystems subsystems : list){
